@@ -4,6 +4,7 @@
   "package": "net.tntninja2.mtmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ModEntityDataSaver"
   ],
   "client": [
     "ExampleMixin"

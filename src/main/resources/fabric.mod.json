@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.tntninja2.mtmod.MTMod"
+    ],
+    "client": [
+      "net.tntninja2.mtmod.MTModClient"
     ]
   },
   "mixins": [
