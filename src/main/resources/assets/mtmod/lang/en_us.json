@@ -1,0 +1,10 @@
+{
+  "item.mtmod.mythril_ingot": "Mythril Ingot",
+  "item.mtmod.mythril_golem_spawn_egg": "Mythril Golem Spawn",
+  "block.mtmod.mythril_block": "Mythril Block",
+  "block.mtmod.acid_block": "Acid Block",
+
+  "key.mtmod.category.mt": "MT Mod Keybindings",
+  "key.mtmod.dash": "Dash Key"
+
+}

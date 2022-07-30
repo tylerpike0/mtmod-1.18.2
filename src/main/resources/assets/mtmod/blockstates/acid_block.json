@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "mtmod:block/acid_block" }
+  }
+}

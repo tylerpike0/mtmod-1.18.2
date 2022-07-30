@@ -1,0 +1,68 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.mythril_golem",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "rest_of_model",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "right_arm",
+					"parent": "rest_of_model",
+					"pivot": [0, 15, 0],
+					"cubes": [
+						{"origin": [-10, 5, -3], "size": [4, 12, 6], "uv": [26, 24]}
+					]
+				},
+				{
+					"name": "left_arm",
+					"parent": "rest_of_model",
+					"pivot": [0, 15, 0],
+					"cubes": [
+						{"origin": [6, 5, -2], "size": [4, 12, 5], "uv": [0, 30]}
+					]
+				},
+				{
+					"name": "body",
+					"parent": "rest_of_model",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-6, 8, -4], "size": [12, 10, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "right_leg",
+					"parent": "rest_of_model",
+					"pivot": [0, 7, 0],
+					"cubes": [
+						{"origin": [-5, 0, -2], "size": [4, 8, 4], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "left_leg",
+					"parent": "rest_of_model",
+					"pivot": [0, 7, 0],
+					"cubes": [
+						{"origin": [1, 0, -2], "size": [4, 8, 4], "uv": [40, 12]}
+					]
+				},
+				{
+					"name": "head",
+					"pivot": [0, 19, 0],
+					"cubes": [
+						{"origin": [-5, 18, -3], "size": [10, 6, 6], "uv": [0, 18]}
+					]
+				}
+			]
+		}
+	]
+}

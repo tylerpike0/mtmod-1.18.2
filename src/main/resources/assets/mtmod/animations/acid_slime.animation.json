@@ -1,0 +1,16 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.acid_slime.move": {
+			"loop": true,
+			"bones": {
+				"blob": {
+					"scale": {
+						"vector": ["math.sin(query.anim_time*120)*0.1 + 1", 1, "-math.sin(query.anim_time*120)*0.1 + 1"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}.''
