@@ -16,7 +16,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.tntninja2.mtmod.entity.ModEntities;
-import net.tntninja2.mtmod.mixin.ModEntityDataSaver;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;

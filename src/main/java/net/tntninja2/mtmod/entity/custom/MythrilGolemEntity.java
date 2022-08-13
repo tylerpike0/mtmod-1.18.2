@@ -12,6 +12,7 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.command.TriggerCommand;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -54,6 +55,7 @@ public static DefaultAttributeContainer.Builder setAttributes() {
             .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0f)
             .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0f)
             .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f);
+
 }
 
     protected void initGoals() {

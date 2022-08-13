@@ -11,7 +11,7 @@ public class ModMessages {
     public static final Identifier EXAMPLE_ID = new Identifier(MTMod.MOD_ID, "example");
 
     public static void registerC2SPackets() {
-        ServerPlayNetworking.registerGlobalReceiver(EXAMPLE_ID, DashingC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(DASHING_ID, DashingC2SPacket::receive);
     }
 
     public static void registerS2CPackets() {

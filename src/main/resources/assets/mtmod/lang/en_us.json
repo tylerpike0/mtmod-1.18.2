@@ -1,10 +1,18 @@
 {
   "item.mtmod.mythril_ingot": "Mythril Ingot",
   "item.mtmod.mythril_golem_spawn_egg": "Mythril Golem Spawn",
+
+  "item.mtmod.test_helmet": "Test Helmet",
+  "item.mtmod.test_chestplate": "Test Chestplate",
+  "item.mtmod.test_leggings": "Test Leggings",
+  "item.mtmod.test_boots": "Test Boots",
+
   "block.mtmod.mythril_block": "Mythril Block",
   "block.mtmod.acid_block": "Acid Block",
 
   "key.mtmod.category.mt": "MT Mod Keybindings",
-  "key.mtmod.dash": "Dash Key"
+  "key.mtmod.dash": "Dash Key",
+
+  "death.attack.armorSkill": "%1$s experienced too much pain in exchange for power"
 
 }

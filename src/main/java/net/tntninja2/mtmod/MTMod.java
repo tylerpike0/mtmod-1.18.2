@@ -1,21 +1,13 @@
 package net.tntninja2.mtmod;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.tntninja2.mtmod.block.ModBlocks;
-import net.tntninja2.mtmod.entity.ModEntities;
-import net.tntninja2.mtmod.entity.client.AcidSlimeRenderer;
-import net.tntninja2.mtmod.entity.client.MythrilGolemRenderer;
-import net.tntninja2.mtmod.entity.client.WingedBeastRenderer;
 import net.tntninja2.mtmod.item.ModItems;
+import net.tntninja2.mtmod.item.armorSkillsAndNbt.ArmorSkillAbilities;
 import net.tntninja2.mtmod.networking.ModMessages;
 import net.tntninja2.mtmod.util.ModRegistries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.bernie.geckolib3.GeckoLib;
-
-
-import java.util.logging.LogManager;
 
 public class MTMod implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -38,10 +30,10 @@ public class MTMod implements ModInitializer {
 
 		ModRegistries.registerModStuffs();
 		ModMessages.registerC2SPackets();
+		MTModTickEvents.registerServerEndTickEvents();
+
+		ArmorSkillAbilities.register();
 
 	}
 
-	public void on() {
-		System.out.println("tick");
-	}
 }
