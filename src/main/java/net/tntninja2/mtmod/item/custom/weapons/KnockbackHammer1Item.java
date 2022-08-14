@@ -19,7 +19,7 @@ public class KnockbackHammer1Item extends AxeItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Vec3d rotationVector;
         rotationVector = getRotationVector(attacker.getPitch(), attacker.getYaw());
-        target.addVelocity(rotationVector.x, 0.4, rotationVector.z);
+        target.addVelocity(rotationVector.x, 0.25, rotationVector.z);
         super.postHit(stack, target, attacker);
         return false;
 
