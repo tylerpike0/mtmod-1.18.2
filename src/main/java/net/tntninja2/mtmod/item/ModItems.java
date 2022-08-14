@@ -10,8 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.tntninja2.mtmod.entity.ModEntities;
 import net.tntninja2.mtmod.item.custom.MythrilIngotItem;
-import net.tntninja2.mtmod.item.custom.armor.ModArmorMaterials;
-import net.tntninja2.mtmod.item.custom.armor.TestArmorItem;
+import net.tntninja2.mtmod.item.custom.armor.*;
 
 public class ModItems {
     public static final Item MYTHRIL_INGOT = registerItem("mythril_ingot",
@@ -34,6 +33,58 @@ public class ModItems {
                     new FabricItemSettings().group(ItemGroup.MISC)));
     public static final Item TEST_BOOTS = registerItem("test_boots",
             new TestArmorItem(ModArmorMaterials.TEST, EquipmentSlot.FEET,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item TIER1_HELMET = registerItem("tier1_helmet",
+            new Tier1ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.HEAD,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER1_CHESTPLATE = registerItem("tier1_chestplate",
+            new Tier1ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.CHEST,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER1_LEGGINGS = registerItem("tier1_leggings",
+            new Tier1ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.LEGS,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER1_BOOTS = registerItem("tier1_boots",
+            new Tier1ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.FEET,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item TIER2_HELMET = registerItem("tier2_helmet",
+            new Tier2ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.HEAD,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER2_CHESTPLATE = registerItem("tier2_chestplate",
+            new Tier2ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.CHEST,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER2_LEGGINGS = registerItem("tier2_leggings",
+            new Tier2ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.LEGS,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER2_BOOTS = registerItem("tier2_boots",
+            new Tier2ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.FEET,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item TIER3_HELMET = registerItem("tier3_helmet",
+            new Tier3ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.HEAD,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER3_CHESTPLATE = registerItem("tier3_chestplate",
+            new Tier3ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.CHEST,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER3_LEGGINGS = registerItem("tier3_leggings",
+            new Tier3ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.LEGS,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER3_BOOTS = registerItem("tier3_boots",
+            new Tier3ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.FEET,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item TIER4_HELMET = registerItem("tier4_helmet",
+            new Tier4ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.HEAD,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER4_CHESTPLATE = registerItem("tier4_chestplate",
+            new Tier4ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.CHEST,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER4_LEGGINGS = registerItem("tier4_leggings",
+            new Tier4ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.LEGS,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+    public static final Item TIER4_BOOTS = registerItem("tier4_boots",
+            new Tier4ArmorItem(ModArmorMaterials.TEST, EquipmentSlot.FEET,
                     new FabricItemSettings().group(ItemGroup.MISC)));
 
 

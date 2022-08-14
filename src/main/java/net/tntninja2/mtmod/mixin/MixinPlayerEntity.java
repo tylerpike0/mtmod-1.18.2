@@ -23,7 +23,6 @@ public abstract class MixinPlayerEntity extends LivingEntity implements IMixinPl
 
     @Inject(method = "attack", at = @At("HEAD"))
     public void injectAttack(Entity target, CallbackInfo info) {
-        MTMod.LOGGER.info(target.getClass().getName() + "was hurt");
         ActionResult result = PlayerHitEntityCallback.EVENT.invoker().hurtEntity((PlayerEntity) (Object) this, target);
 
 

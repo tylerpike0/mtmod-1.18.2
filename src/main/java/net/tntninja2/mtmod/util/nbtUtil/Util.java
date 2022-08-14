@@ -29,4 +29,10 @@ public class Util {
         return list.get(i);
     }
 
+    public static int randomIntInRange(int min, int max) {
+
+        int result = min + ((int)(Math.random() * (max - min + 1)));
+        return result;
+    }
+
 }

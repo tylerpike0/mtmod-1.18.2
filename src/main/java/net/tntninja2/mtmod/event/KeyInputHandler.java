@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -15,6 +16,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.tntninja2.mtmod.item.custom.armor.ModArmorItem;
+import net.tntninja2.mtmod.mixin.MixinLivingEntity;
+import net.tntninja2.mtmod.mixinInterface.IMixinLivingEntity;
 import net.tntninja2.mtmod.networking.ModMessages;
 import net.tntninja2.mtmod.mixinInterface.IMixinEntity;
 import org.lwjgl.glfw.GLFW;
@@ -47,8 +50,7 @@ public class KeyInputHandler {
                         Item item = (client.player.getStackInHand(Hand.MAIN_HAND).getItem());
 
                         ModArmorItem modArmorItem = item instanceof ModArmorItem ? ((ModArmorItem) item) : null;
-                        if (modArmorItem != null) {
-                        }
+
 
 
                         int dashEnergy = ((IMixinEntity) client.player).getMTModData().getInt("dash_energy");
@@ -92,18 +94,18 @@ public class KeyInputHandler {
                 client.player.addVelocity(rotationVector.x, 0.1, rotationVector.z);
             }
             if (client.player.input.pressingRight) {
-//                TODO: make this and next 2 directions move player in proper direction using rotationVector.rotate
                 Vec3d rightRotationVector = rotationVector.rotateY((float) Math.toRadians(-90));
                 client.player.addVelocity(rightRotationVector.x, 0.1, rightRotationVector.z);
             }
             if (client.player.input.pressingLeft) {
                 Vec3d leftRotationVector = rotationVector.rotateY((float) Math.toRadians(90));
-                client.player.addVelocity(leftRotationVector.x, 0.1, rotationVector.z);
+                client.player.addVelocity(leftRotationVector.x, 0.1, leftRotationVector.z);
             }
             if (client.player.input.pressingBack) {
                 Vec3d backRotationVector = rotationVector.rotateY((float) Math.toRadians(180));
-                client.player.addVelocity(backRotationVector.x, 0.1, rotationVector.z);
+                client.player.addVelocity(backRotationVector.x, 0.1, backRotationVector.z);
             }
+            ((IMixinLivingEntity) client.player).setMtModInvulnerabilityTicks(999);
         }
 
     }

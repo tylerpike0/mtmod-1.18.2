@@ -16,12 +16,13 @@ import java.util.List;
 
 public interface IMixinItemStack {
 
-    boolean hasNbtSet = false;
 
     default void addOtherNbt() {
     }
 
     default void addSkillNbt() {
+    }
+    default void incrementSkill() {
     }
 
 

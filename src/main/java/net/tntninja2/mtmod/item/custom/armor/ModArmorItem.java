@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 public class ModArmorItem extends ArmorItem {
-
+    protected int tier;
     public boolean hasNbtSet;
 
 
@@ -43,5 +43,9 @@ public class ModArmorItem extends ArmorItem {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    public int getTier() {
+        return tier;
     }
 }

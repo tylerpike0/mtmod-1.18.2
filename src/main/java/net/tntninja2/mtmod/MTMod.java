@@ -1,7 +1,9 @@
 package net.tntninja2.mtmod;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.ActionResult;
 import net.tntninja2.mtmod.block.ModBlocks;
+import net.tntninja2.mtmod.event.LivingEntityDamageCancelCallback;
 import net.tntninja2.mtmod.item.ModItems;
 import net.tntninja2.mtmod.item.armorSkillsAndNbt.ArmorSkillAbilities;
 import net.tntninja2.mtmod.networking.ModMessages;
@@ -33,6 +35,11 @@ public class MTMod implements ModInitializer {
 		MTModTickEvents.registerServerEndTickEvents();
 
 		ArmorSkillAbilities.register();
+
+		LivingEntityDamageCancelCallback.EVENT.register((livingEntity, damageSource, amount) -> {
+			MTMod.LOGGER.info(livingEntity.getClass().descriptorString() + " was avoided " + amount + " from " + damageSource.toString());
+			return ActionResult.PASS;
+		});
 
 	}
 
