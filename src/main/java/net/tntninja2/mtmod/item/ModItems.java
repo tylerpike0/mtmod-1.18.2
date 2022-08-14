@@ -2,15 +2,14 @@ package net.tntninja2.mtmod.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.tntninja2.mtmod.MTMod;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.tntninja2.mtmod.entity.ModEntities;
 import net.tntninja2.mtmod.item.custom.MythrilIngotItem;
 import net.tntninja2.mtmod.item.custom.armor.*;
+import net.tntninja2.mtmod.item.custom.weapons.KnockbackHammer1Item;
 
 public class ModItems {
     public static final Item MYTHRIL_INGOT = registerItem("mythril_ingot",
@@ -22,6 +21,11 @@ public class ModItems {
     public static final Item MYTHRIL_GOLEM_SPAWN_EGG = registerItem("mythril_golem_spawn_egg",
             new SpawnEggItem(ModEntities.MYTHRIL_GOLEM, 999999, 000000,
                     new FabricItemSettings().group(ItemGroup.MISC)));
+
+    public static final Item KNOCKBACK_HAMMER_1_ITEM = registerItem("knockback_hammer_1_item",
+            new KnockbackHammer1Item(ToolMaterials.NETHERITE,3.5f,0.9f,
+                    new FabricItemSettings().group(ItemGroup.MISC)));
+
     public static final Item TEST_HELMET = registerItem("test_helmet",
             new TestArmorItem(ModArmorMaterials.TEST, EquipmentSlot.HEAD,
                     new FabricItemSettings().group(ItemGroup.MISC)));
