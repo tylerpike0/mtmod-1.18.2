@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "item/basic_hammer",
-		"particle": "item/basic_hammer"
+		"0": "mtmod:item/basic_hammer",
+		"particle": "mtmod:item/basic_hammer"
 	},
 	"elements": [
 		{

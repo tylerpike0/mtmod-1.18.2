@@ -10,4 +10,6 @@ public class Tier1ArmorItem extends ModArmorItem {
         super.tier = 1;
     }
 
+
+
 }
