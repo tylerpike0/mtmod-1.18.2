@@ -73,7 +73,28 @@ public class KeyInputHandler {
 
     public static void dash(MinecraftClient client) {
 
-        if (client.player.isOnGround()) {
+        if (client.player.isSubmergedInWater()) {
+            Vec3d rotationVector;
+            rotationVector = getRotationVector(client.player.getPitch(), client.player.getYaw());
+
+            ClientPlayNetworking.send(ModMessages.DASHING_ID, PacketByteBufs.create());
+
+            if (client.player.input.pressingForward) {
+                client.player.addVelocity(rotationVector.x, rotationVector.y, rotationVector.z);
+            }
+            if (client.player.input.pressingRight) {
+                Vec3d rightRotationVector = rotationVector.rotateY((float) Math.toRadians(-90));
+                client.player.addVelocity(rightRotationVector.x, 0, rightRotationVector.z);
+            }
+            if (client.player.input.pressingLeft) {
+                Vec3d leftRotationVector = rotationVector.rotateY((float) Math.toRadians(90));
+                client.player.addVelocity(leftRotationVector.x, 0, leftRotationVector.z);
+            }
+            if (client.player.input.pressingBack) {
+                Vec3d backRotationVector = rotationVector.rotateY((float) Math.toRadians(180));
+                client.player.addVelocity(backRotationVector.x, -backRotationVector.y, backRotationVector.z);
+            }
+        } else if (client.player.isOnGround()) {
 
             Iterator<ItemStack> armorItems = client.player.getArmorItems().iterator();
             int evasion = 0;
