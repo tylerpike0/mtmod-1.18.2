@@ -172,7 +172,7 @@ public class ArmorSkillAbilities {
 //        Healing
         if (healing > 0) {
             if (server.getTicks() % (960 / healing) == 0) {
-                playerEntity.setHealth(playerEntity.getHealth() + 1);
+                playerEntity.heal(1);
             }
         }
 
