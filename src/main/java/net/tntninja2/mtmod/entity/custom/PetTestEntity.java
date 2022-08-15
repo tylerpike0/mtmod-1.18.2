@@ -14,12 +14,16 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.tntninja2.mtmod.block.ModBlocks;
 import net.tntninja2.mtmod.goal.EscapeAcidGoal;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -28,14 +32,12 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class PetTestEntity extends PathAwareEntity implements IAnimatable {
+public class PetTestEntity extends TameableEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-
-    public PetTestEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public PetTestEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
     }
-
 
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -98,6 +100,12 @@ public class PetTestEntity extends PathAwareEntity implements IAnimatable {
 
     protected EntityNavigation createNavigation(World world) {
         return new Navigation(this, world);
+    }
+
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
     }
 
 
