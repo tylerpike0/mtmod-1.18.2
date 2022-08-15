@@ -40,6 +40,8 @@ public class PetTestEntity extends TameableEntity implements IAnimatable {
     }
 
 
+
+
     public static DefaultAttributeContainer.Builder setAttributes() {
     return AnimalEntity.createMobAttributes()
             .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)

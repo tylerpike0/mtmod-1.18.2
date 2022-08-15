@@ -2,6 +2,8 @@ package net.tntninja2.mtmod;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.tntninja2.mtmod.client.DashHudOverlay;
 import net.tntninja2.mtmod.entity.ModEntities;
 import net.tntninja2.mtmod.entity.client.AcidSlimeRenderer;
 import net.tntninja2.mtmod.entity.client.MythrilGolemRenderer;
@@ -23,6 +25,8 @@ public class MTModClient implements ClientModInitializer {
             EntityRendererRegistry.register(ModEntities.ACID_SLIME, AcidSlimeRenderer::new);
             EntityRendererRegistry.register(ModEntities.WINGED_BEAST, WingedBeastRenderer::new);
             EntityRendererRegistry.register(ModEntities.PET_TEST, PetTestRenderer::new);
+
+            HudRenderCallback.EVENT.register(new DashHudOverlay());
 
             ModMessages.registerS2CPackets();
 

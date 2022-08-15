@@ -103,6 +103,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
             adjectives.add("Profane");
             adjectives.add("Forboding");
             adjectives.add("Brooding");
+            adjectives.add("Uncomfortable");
 
 
             List<String> armorPieces = new ArrayList<>();
