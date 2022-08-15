@@ -5,6 +5,7 @@
         import net.tntninja2.mtmod.entity.ModEntities;
         import net.tntninja2.mtmod.entity.custom.AcidSlimeEntity;
         import net.tntninja2.mtmod.entity.custom.MythrilGolemEntity;
+        import net.tntninja2.mtmod.entity.custom.PetTestEntity;
 
         public class ModRegistries {
     public static void registerModStuffs() {
@@ -17,5 +18,6 @@
         FabricDefaultAttributeRegistry.register(ModEntities.MYTHRIL_GOLEM, MythrilGolemEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ACID_SLIME, AcidSlimeEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.WINGED_BEAST, AcidSlimeEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.PET_TEST, PetTestEntity.setAttributes());
     }
 }

@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.tntninja2.mtmod.entity.ModEntities;
 import net.tntninja2.mtmod.entity.client.AcidSlimeRenderer;
 import net.tntninja2.mtmod.entity.client.MythrilGolemRenderer;
+import net.tntninja2.mtmod.entity.client.PetTestRenderer;
 import net.tntninja2.mtmod.entity.client.WingedBeastRenderer;
 import net.tntninja2.mtmod.event.KeyInputHandler;
 import net.tntninja2.mtmod.networking.ModMessages;
@@ -21,6 +22,7 @@ public class MTModClient implements ClientModInitializer {
             EntityRendererRegistry.register(ModEntities.MYTHRIL_GOLEM, MythrilGolemRenderer::new);
             EntityRendererRegistry.register(ModEntities.ACID_SLIME, AcidSlimeRenderer::new);
             EntityRendererRegistry.register(ModEntities.WINGED_BEAST, WingedBeastRenderer::new);
+            EntityRendererRegistry.register(ModEntities.PET_TEST, PetTestRenderer::new);
 
             ModMessages.registerS2CPackets();
 

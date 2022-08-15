@@ -43,7 +43,7 @@ public class PetTestEntity extends PathAwareEntity implements IAnimatable {
             .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D)
             .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0f)
             .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0f)
-            .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f);
+            .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f);
 }
 
     public void tick() {
@@ -74,7 +74,7 @@ public class PetTestEntity extends PathAwareEntity implements IAnimatable {
     private  <E extends IAnimatable> PlayState predicate(@NotNull AnimationEvent<E> event) {
 //        Logic for controlling animations
 
-        event.getController().setAnimation((new AnimationBuilder().addAnimation("animation.acid_slime.move", true)));
+        event.getController().setAnimation((new AnimationBuilder().addAnimation("animation.pet_test.walk", true)));
         return PlayState.CONTINUE;
 
 
