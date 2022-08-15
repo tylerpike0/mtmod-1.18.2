@@ -1,0 +1,31 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.walk": {
+			"animation_length": 6.33333,
+			"bones": {
+				"front_right_leg": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time*200)*-1"]
+					}
+				},
+				"front_left_leg": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time*200)*1"]
+					}
+				},
+				"back_right_leg": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time*200)*-1"]
+					}
+				},
+				"back_left_leg": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time*200)*1"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

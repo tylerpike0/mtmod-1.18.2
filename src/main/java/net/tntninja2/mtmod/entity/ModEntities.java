@@ -9,10 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.tntninja2.mtmod.MTMod;
-import net.tntninja2.mtmod.entity.custom.AcidSlimeEntity;
-import net.tntninja2.mtmod.entity.custom.MythrilGolemEntity;
-import net.tntninja2.mtmod.entity.custom.WingedBeastEntity;
-import net.tntninja2.mtmod.entity.custom.WingedBeastPart;
+import net.tntninja2.mtmod.entity.custom.*;
 
 public class ModEntities {
     public static final EntityType<MythrilGolemEntity> MYTHRIL_GOLEM = Registry.register(
@@ -29,6 +26,11 @@ public class ModEntities {
             Registry.ENTITY_TYPE, new Identifier(MTMod.MOD_ID, "winged_beast"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, WingedBeastEntity::new)
                     .dimensions(EntityDimensions.fixed(1f,1f)).build());
+
+    public static final EntityType<PetTestEntity> PET_TEST = Registry.register(
+            Registry.ENTITY_TYPE, new Identifier(MTMod.MOD_ID, "pet_test"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PetTestEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5625f,0.5625f)).build());
 
 //static {
 //    ARMOR_STAND = register("armor_stand", EntityType.Builder.create(ArmorStandEntity::new, SpawnGroup.MISC)
