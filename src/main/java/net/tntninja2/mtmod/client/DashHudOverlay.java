@@ -41,14 +41,14 @@ public class DashHudOverlay implements HudRenderCallback {
         RenderSystem.setShaderColor(1f,1f,1f,1f);
         RenderSystem.setShaderTexture(0, EMPTY_DASH_ENERGY);
         for (int i = 0; i < ((IMixinEntity) client.player).getMTModData().getInt("dash_max_energy"); i++) {
-            DrawableHelper.drawTexture(matrixStack, x - 94 + (i * 9), y - 54 - verticalOffset, 0, 0, 12, 12,
+            DrawableHelper.drawTexture(matrixStack, x - 94 + (i * 8), y - 54 - verticalOffset, 0, 0, 10, 12,
                     12, 12);
         }
 
         RenderSystem.setShaderTexture(0, FILLED_DASH_ENERGY);
 
         for (int i = 0; i < ((IMixinEntity) client.player).getMTModData().getInt("dash_energy"); i++) {
-                DrawableHelper.drawTexture(matrixStack, x - 94 + (i * 9), y - 54 - verticalOffset, 0, 0, 12, 12,
+                DrawableHelper.drawTexture(matrixStack, x - 94 + (i * 8), y - 54 - verticalOffset, 0, 0, 10, 12,
                         12, 12);
 
         }
