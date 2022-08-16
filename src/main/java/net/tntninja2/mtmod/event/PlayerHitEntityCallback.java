@@ -1,5 +1,6 @@
 package net.tntninja2.mtmod.event;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.Entity;
@@ -25,5 +26,5 @@ public interface PlayerHitEntityCallback {
                 return ActionResult.PASS;
             });
 
-    ActionResult hurtEntity(PlayerEntity playerEntity, Entity entity);
+    ActionResult hurtEntity(PlayerEntity playerEntity, Entity entity) throws CommandSyntaxException;
 }

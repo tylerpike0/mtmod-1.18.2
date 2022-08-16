@@ -1,5 +1,6 @@
 package net.tntninja2.mtmod.mixin;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,8 +22,8 @@ public abstract class MixinPlayerEntity extends LivingEntity implements IMixinPl
         super(entityType, world);
     }
 
-    @Inject(method = "attack", at = @At("HEAD"))
-    public void injectAttack(Entity target, CallbackInfo info) {
+    @Inject(method = "attack", at = @At("RETURN"))
+    public void injectAttack(Entity target, CallbackInfo info) throws CommandSyntaxException {
         ActionResult result = PlayerHitEntityCallback.EVENT.invoker().hurtEntity((PlayerEntity) (Object) this, target);
 
 

@@ -1,5 +1,6 @@
 package net.tntninja2.mtmod.mixin;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -42,7 +43,7 @@ public abstract class MixinLivingEntity extends Entity implements IMixinLivingEn
 
 
 @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    public void injectDamage(DamageSource source, float amount, CallbackInfoReturnable info) {
+    public void injectDamage(DamageSource source, float amount, CallbackInfoReturnable info) throws CommandSyntaxException {
     int invulnerabilityTicks = ((IMixinEntity) this).getMTModData().getInt("invulnerability_ticks");
     if (invulnerabilityTicks > 0) {
         ActionResult result = LivingEntityDamageCancelCallback.EVENT.invoker().damageCancel((LivingEntity) (Object) this, source, amount);

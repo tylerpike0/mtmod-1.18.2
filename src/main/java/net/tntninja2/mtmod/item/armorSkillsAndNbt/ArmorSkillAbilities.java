@@ -63,7 +63,7 @@ public class ArmorSkillAbilities {
     }
 
 
-    public static void onHitAbilities(PlayerEntity playerEntity, Entity entity) {
+    public static void onHitAbilities(PlayerEntity playerEntity, Entity entity) throws CommandSyntaxException {
         Iterator<ItemStack> armorItems = playerEntity.getArmorItems().iterator();
         int combo = 0;
         while (armorItems.hasNext()) {
@@ -83,6 +83,11 @@ public class ArmorSkillAbilities {
 //        shattering
         float shatteringCharge = 0;
         ((IMixinEntity) playerEntity).getMTModData().putFloat("shattering_charge", shatteringCharge);
+
+
+//        gutsy
+       AttributeUtil.attributeModifierRemove(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("9ac90cc9-0dce-4145-9d58-6121fa29aaf0"));
+
 
     }
 
@@ -105,7 +110,7 @@ public class ArmorSkillAbilities {
     }
 
 
-    private static void onDodgeAbilities(PlayerEntity playerEntity, DamageSource damageSource, double amount) {
+    private static void onDodgeAbilities(PlayerEntity playerEntity, DamageSource damageSource, double amount) throws CommandSyntaxException {
         Iterator<ItemStack> armorItems = playerEntity.getArmorItems().iterator();
         int daring = 0;
         int gutsy = 0;

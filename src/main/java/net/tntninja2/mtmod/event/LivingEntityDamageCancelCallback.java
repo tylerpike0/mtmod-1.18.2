@@ -1,5 +1,6 @@
 package net.tntninja2.mtmod.event;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.Entity;
@@ -22,5 +23,5 @@ public interface LivingEntityDamageCancelCallback {
                 return ActionResult.PASS;
             });
 
-    ActionResult damageCancel(LivingEntity livingEntity, DamageSource damageSource, float amount);
+    ActionResult damageCancel(LivingEntity livingEntity, DamageSource damageSource, float amount) throws CommandSyntaxException;
 }
