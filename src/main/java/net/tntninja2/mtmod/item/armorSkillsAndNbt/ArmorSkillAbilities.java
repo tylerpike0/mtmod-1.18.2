@@ -120,11 +120,17 @@ public class ArmorSkillAbilities {
 
 //        Daring
 //        heal player based on daring level and possibly the amount of damage they would have taken
+        playerEntity.heal((float) amount / 12 * daring);
+
 
 
 //        Gutsy
 //        give the player a melee boost based on gutsy level and possibly the amount of damage they would have taken
-
+        if (amount > 20) {
+            amount = 20;
+        }
+        double gutsyAttackBoost = amount / 10 * gutsy;
+        AttributeUtil.attributeModifierAddOrReplace(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("9ac90cc9-0dce-4145-9d58-6121fa29aaf0"), "gutsy", gutsyAttackBoost, EntityAttributeModifier.Operation.ADDITION);
 
     }
 
