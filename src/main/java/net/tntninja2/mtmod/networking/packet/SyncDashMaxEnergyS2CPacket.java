@@ -13,7 +13,8 @@ public class SyncDashMaxEnergyS2CPacket {
         //Everything here ONLY happens on the client
         ClientPlayerEntity player = client.player;
         int value = buf.readInt();
-
-        ((IMixinEntity) player).getMTModData().putInt("dash_max_energy", value);
+        if (player != null) {
+            ((IMixinEntity) player).getMTModData().putInt("dash_max_energy", value);
+        }
     }
 }
