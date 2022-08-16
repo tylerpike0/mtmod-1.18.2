@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
@@ -64,7 +65,7 @@ public class KeyInputHandler {
                             ClientPlayNetworking.send(ModMessages.INVULNERABILITY_TICKS_ID, packetByteBuf);
 
                         } else {
-                            client.player.sendMessage(Text.of("You have no dodges!!!"), true);
+                            client.player.playSound(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 10, 1);
                         }
                     }
                 }

@@ -248,7 +248,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
     }
 
     private void addAllSkillsLevel2() {
-        for (String s : Arrays.asList("health_boost", "healing", "berserker", "peak_performance", "melee_boost", "luck", "pain_for_power", "magic_damage", "mana_regen", "resistance", "leeching", "evasion", "preserving", "afflicting", "combo", "fury", "fearless", "fearful", "greedy", "shattering")) {
+        for (String s : Arrays.asList("health_boost", "healing", "berserker", "peak_performance", "damage_boost", "luck", "pain_for_power", "magic_damage", "mana_regen", "resistance", "leeching", "evasion", "preserving", "afflicting", "combo", "fury", "fearless", "fearful", "greedy", "shattering")) {
             ((ItemStack) (Object) this).getOrCreateSubNbt("mtmod:armor_skills").putInt(s, 2);
         }
 
@@ -261,10 +261,9 @@ public abstract class MixinItemStack implements IMixinItemStack {
         skills.add("healing");
         skills.add("berserker");
         skills.add("peak_performance");
-        skills.add("melee_boost");
+        skills.add("damage_boost");
         skills.add("luck");
         skills.add("pain_for_power");
-        skills.add("magic_damage");
         skills.add("mana_regen");
         skills.add("resistance");
         skills.add("leeching");
@@ -272,9 +271,8 @@ public abstract class MixinItemStack implements IMixinItemStack {
         skills.add("preserving");
         skills.add("afflicting");
         skills.add("combo");
-        skills.add("fury");
-        skills.add("fearless");
-        skills.add("fearful");
+        skills.add("daring");
+        skills.add("gutsy");
         skills.add("greedy");
         skills.add("shattering");
         return skills;

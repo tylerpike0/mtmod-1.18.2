@@ -19,6 +19,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.tntninja2.mtmod.damage.ModDamageSource;
+import net.tntninja2.mtmod.event.LivingEntityDamageCancelCallback;
 import net.tntninja2.mtmod.event.PlayerHitEntityCallback;
 import net.tntninja2.mtmod.mixinInterface.IMixinEntity;
 import net.tntninja2.mtmod.networking.ModMessages;
@@ -49,6 +50,14 @@ public class ArmorSkillAbilities {
 
         PlayerHitEntityCallback.EVENT.register((playerEntity, entity) -> {
             onHitAbilities(playerEntity,entity);
+            return ActionResult.PASS;
+        });
+
+
+        LivingEntityDamageCancelCallback.EVENT.register((livingEntity, damageSource, amount) -> {
+            if (livingEntity instanceof PlayerEntity) {
+                onDodgeAbilities(((PlayerEntity) livingEntity), damageSource, amount);
+            }
             return ActionResult.PASS;
         });
     }
@@ -95,12 +104,37 @@ public class ArmorSkillAbilities {
 
     }
 
-    private static void tickModArmorSkills(MinecraftServer server, PlayerEntity playerEntity) throws CommandSyntaxException {
+
+    private static void onDodgeAbilities(PlayerEntity playerEntity, DamageSource damageSource, double amount) {
+        Iterator<ItemStack> armorItems = playerEntity.getArmorItems().iterator();
+        int daring = 0;
+        int gutsy = 0;
+        while (armorItems.hasNext()) {
+
+            ItemStack armorStack = armorItems.next();
+            NbtCompound armorSkills = armorStack.getOrCreateSubNbt("mtmod:armor_skills");
+
+            daring += armorSkills.getInt("daring");
+            gutsy += armorSkills.getInt("gutsy");
+        }
+
+//        Daring
+//        heal player based on daring level and possibly the amount of damage they would have taken
+
+
+//        Gutsy
+//        give the player a melee boost based on gutsy level and possibly the amount of damage they would have taken
+
+
+    }
+
+
+        private static void tickModArmorSkills(MinecraftServer server, PlayerEntity playerEntity) throws CommandSyntaxException {
         Iterator<ItemStack> armorItems = playerEntity.getArmorItems().iterator();
 
 
         int healthBoost = 0;
-        int meleeBoost = 0;
+        int damageBoost = 0;
         int peakPerformance = 0;
         int berserker = 0;
         int painForPower = 0;
@@ -116,7 +150,7 @@ public class ArmorSkillAbilities {
             NbtCompound armorSkills = armorStack.getOrCreateSubNbt("mtmod:armor_skills");
 
             healthBoost += armorSkills.getInt("health_boost");
-            meleeBoost += armorSkills.getInt("melee_boost");
+            damageBoost += armorSkills.getInt("damage_boost");
             peakPerformance += armorSkills.getInt("peak_performance");
             berserker += armorSkills.getInt("berserker");
             painForPower += armorSkills.getInt("pain_for_power");
@@ -137,9 +171,9 @@ public class ArmorSkillAbilities {
                 playerEntity.setHealth(playerEntity.getMaxHealth());
             }
         }
-//        Attack Boost
+//        Damage Boost
         if (server.getTicks() % 5 == 0) {
-            AttributeUtil.attributeModifierAddOrReplace(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("ed1967dd-855f-487a-bc59-f362bc72a8b3"), "melee_boost", meleeBoost, EntityAttributeModifier.Operation.ADDITION);
+            AttributeUtil.attributeModifierAddOrReplace(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("ed1967dd-855f-487a-bc59-f362bc72a8b3"), "damage_boost", damageBoost, EntityAttributeModifier.Operation.ADDITION);
         }
 
 //        Peak Performance

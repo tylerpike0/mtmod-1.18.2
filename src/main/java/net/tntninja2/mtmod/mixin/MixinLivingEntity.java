@@ -4,13 +4,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.s2c.play.PlaySoundIdS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 import net.tntninja2.mtmod.MTMod;
 import net.tntninja2.mtmod.event.LivingEntityDamageCancelCallback;
-import net.tntninja2.mtmod.event.PlayerHitEntityCallback;
 import net.tntninja2.mtmod.mixinInterface.IMixinEntity;
 import net.tntninja2.mtmod.mixinInterface.IMixinLivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -45,6 +46,13 @@ public abstract class MixinLivingEntity extends Entity implements IMixinLivingEn
     int invulnerabilityTicks = ((IMixinEntity) this).getMTModData().getInt("invulnerability_ticks");
     if (invulnerabilityTicks > 0) {
         ActionResult result = LivingEntityDamageCancelCallback.EVENT.invoker().damageCancel((LivingEntity) (Object) this, source, amount);
+        if (((Object) this) instanceof ServerPlayerEntity) {
+            (((ServerPlayerEntity) (Object) this)).networkHandler.sendPacket(new PlaySoundIdS2CPacket(SoundEvents.BLOCK_NOTE_BLOCK_CHIME.getId(), SoundCategory.MASTER, this.getPos(), 10, 1));
+            MTMod.LOGGER.info("mixin living entity IS a serverplayerentity");
+
+        } else {
+            MTMod.LOGGER.info("mixin living entity is NOT a serverplayerentity");
+        }
         info.cancel();
     }
 }
