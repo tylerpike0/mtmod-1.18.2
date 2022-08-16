@@ -40,20 +40,16 @@ public class DashHudOverlay implements HudRenderCallback {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1f,1f,1f,1f);
         RenderSystem.setShaderTexture(0, EMPTY_DASH_ENERGY);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < ((IMixinEntity) client.player).getMTModData().getInt("dash_max_energy"); i++) {
             DrawableHelper.drawTexture(matrixStack, x - 94 + (i * 9), y - 54 - verticalOffset, 0, 0, 12, 12,
                     12, 12);
         }
 
         RenderSystem.setShaderTexture(0, FILLED_DASH_ENERGY);
 
-        for (int i = 0; i < 10; i++) {
-            if (((IMixinEntity) MinecraftClient.getInstance().player).getMTModData().getInt("dash_energy") > i) {
+        for (int i = 0; i < ((IMixinEntity) client.player).getMTModData().getInt("dash_energy"); i++) {
                 DrawableHelper.drawTexture(matrixStack, x - 94 + (i * 9), y - 54 - verticalOffset, 0, 0, 12, 12,
                         12, 12);
-            } else {
-                break;
-            }
 
         }
     }

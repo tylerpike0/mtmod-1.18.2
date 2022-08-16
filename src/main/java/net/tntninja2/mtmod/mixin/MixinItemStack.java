@@ -183,6 +183,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
             String suffix = Util.randomStringElement(suffixes);
 
             ((ItemStack) (Object) this).getOrCreateSubNbt("display").putString("Name", ItemDisplayUtil.NameJson("The " + adjective + " " +  armorPiece + " of " + firstName + " " + suffix , "#FF00FF", true));
+            ((ItemStack) (Object) this).getOrCreateNbt().putBoolean("Unbreakable", true);
         }
     }
 

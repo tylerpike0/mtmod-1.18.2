@@ -3,6 +3,8 @@ package net.tntninja2.mtmod.item.armorSkillsAndNbt;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -11,14 +13,15 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
-import net.tntninja2.mtmod.MTMod;
 import net.tntninja2.mtmod.damage.ModDamageSource;
 import net.tntninja2.mtmod.event.PlayerHitEntityCallback;
 import net.tntninja2.mtmod.mixinInterface.IMixinEntity;
+import net.tntninja2.mtmod.networking.ModMessages;
 import net.tntninja2.mtmod.util.nbtUtil.AttributeUtil;
 
 import java.util.Iterator;
@@ -39,7 +42,6 @@ public class ArmorSkillAbilities {
         });
 
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) -> {
-            MTMod.LOGGER.info(" an entity was killed");
             if (entity instanceof PlayerEntity) {
                 onKillAbilities(world, ((PlayerEntity) entity), killedEntity);
             }
@@ -47,7 +49,6 @@ public class ArmorSkillAbilities {
 
         PlayerHitEntityCallback.EVENT.register((playerEntity, entity) -> {
             onHitAbilities(playerEntity,entity);
-            MTMod.LOGGER.info("entity hit");
             return ActionResult.PASS;
         });
     }
@@ -63,10 +64,12 @@ public class ArmorSkillAbilities {
             combo += armorSkills.getInt("combo");
         }
 
+
 //        combo
         float comboCharge = ((IMixinEntity) playerEntity).getMTModData().getFloat("combo_charge");
         comboCharge += ((float) combo) / 2;
         ((IMixinEntity) playerEntity).getMTModData().putFloat("combo_charge", comboCharge);
+
 
 //        shattering
         float shatteringCharge = 0;
@@ -105,6 +108,7 @@ public class ArmorSkillAbilities {
         int luck = 0;
         int combo = 0;
         int shattering = 0;
+        int evasion = 0;
 
         while (armorItems.hasNext()){
 
@@ -120,6 +124,7 @@ public class ArmorSkillAbilities {
             luck += armorSkills.getInt("luck");
             combo += armorSkills.getInt("combo");
             shattering += armorSkills.getInt("shattering");
+            evasion += armorSkills.getInt("evasion");
 
         }
 
@@ -198,6 +203,15 @@ public class ArmorSkillAbilities {
         }
 
 
+//        Evasion
+        int originalDashMaxEnergy = ((IMixinEntity) playerEntity).getMTModData().getInt("dash_max_energy");
+        int newDashMaxEnergy = evasion + 3;
+        if (originalDashMaxEnergy != newDashMaxEnergy) {
+            ((IMixinEntity) playerEntity).getMTModData().putInt("dash_max_energy", newDashMaxEnergy);
+            PacketByteBuf packetByteBuf = PacketByteBufs.create();
+            packetByteBuf.writeInt(newDashMaxEnergy);
+            ServerPlayNetworking.send((ServerPlayerEntity) playerEntity, ModMessages.SYNC_DASH_MAX_ENERGY_ID, packetByteBuf);
+        }
     }
 
 

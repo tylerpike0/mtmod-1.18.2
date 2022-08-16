@@ -44,20 +44,27 @@ public class MTModTickEvents {
 
             int dashRegenTimer = ((IMixinEntity) client.player).getMTModData().getInt("dash_regen_timer");
             int dashEnergy = ((IMixinEntity) client.player).getMTModData().getInt("dash_energy");
+            int dashMaxEnergy = ((IMixinEntity) client.player).getMTModData().getInt("dash_max_energy");
 
-            if (dashEnergy <= 2) {
-                if (dashRegenTimer >= 60) {
+
+            if (dashEnergy < dashMaxEnergy) {
+                if (dashRegenTimer >= 120) {
 
                     dashRegenTimer = 0;
-                    dashEnergy = 3;
+                    dashEnergy = dashMaxEnergy;
 
                 } else {
                     dashRegenTimer++;
                 }
             }
 
+            if (dashEnergy > dashMaxEnergy) {
+                dashEnergy = dashMaxEnergy;
+            }
+
             ((IMixinEntity) client.player).getMTModData().putInt("dash_energy", dashEnergy);
             ((IMixinEntity) client.player).getMTModData().putInt("dash_regen_timer", dashRegenTimer);
+
         }
 
     }

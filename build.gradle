@@ -10,6 +10,8 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -19,6 +21,7 @@ repositories {
 
 //	GeckoLib animations
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	maven {url = "https://jitpack.io"}
 }
 
 dependencies {
@@ -32,6 +35,11 @@ dependencies {
 
 //	GeckoLib animations
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.18:3.0.50'
+
+	modApi("com.github.Virtuoel:Pehkui:${pehkui_version}", {
+		exclude group: "net.fabricmc.fabric-api"
+	})
+
 }
 
 processResources {

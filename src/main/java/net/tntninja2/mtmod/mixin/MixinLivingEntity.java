@@ -27,24 +27,26 @@ public abstract class MixinLivingEntity extends Entity implements IMixinLivingEn
         super(entityType, world);
     }
 
-    public int getMtModInvulnerabilityTicks() {
-        return mtModInvulnerabilityTicks;
+
+
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    public void injectTick(CallbackInfo info) {
+        int invulnerabilityTicks = ((IMixinEntity) this).getMTModData().getInt("invulnerability_ticks");
+        if (invulnerabilityTicks > 0) {
+            invulnerabilityTicks--;
+        }
+        ((IMixinEntity) this).getMTModData().putInt("invulnerability_ticks", invulnerabilityTicks);
     }
 
-    public void setMtModInvulnerabilityTicks(int mtModInvulnerabilityTicks) {
-        this.mtModInvulnerabilityTicks = mtModInvulnerabilityTicks;
-    }
 
-    private int mtModInvulnerabilityTicks;
-
-
-@Inject(method = "damage", at = @At("HEAD"))
+@Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void injectDamage(DamageSource source, float amount, CallbackInfoReturnable info) {
-    MTMod.LOGGER.info("entitie's mtModInvulnerabilityTicks is " + this.mtModInvulnerabilityTicks);
-    if (this.mtModInvulnerabilityTicks > 0) {
+    int invulnerabilityTicks = ((IMixinEntity) this).getMTModData().getInt("invulnerability_ticks");
+    if (invulnerabilityTicks > 0) {
         ActionResult result = LivingEntityDamageCancelCallback.EVENT.invoker().damageCancel((LivingEntity) (Object) this, source, amount);
+        info.cancel();
     }
-    this.setMtModInvulnerabilityTicks(10);
 }
 
 
