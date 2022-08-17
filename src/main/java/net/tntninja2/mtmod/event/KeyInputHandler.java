@@ -31,6 +31,8 @@ public class KeyInputHandler {
     public static final String Key_Category_MT = "key.mtmod.category.mt";
 
     public static final String Key_Dash = "key.mtmod.dash";
+    public static final String Key_Light_Attack = "key.mtmod.light_attack";
+    public static final String Key_Heavy_Attack = "key.mtmod.heavy_attack";
 
 
     public static KeyBinding dashKey;
@@ -149,6 +151,20 @@ public class KeyInputHandler {
                 Key_Dash,
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
+                Key_Category_MT
+        ));
+
+        lightAttackKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                Key_Light_Attack,
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_C,
+                Key_Category_MT
+        ));
+
+        heavyAttackKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                Key_Heavy_Attack,
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_B,
                 Key_Category_MT
         ));
         registerKeyInputs();

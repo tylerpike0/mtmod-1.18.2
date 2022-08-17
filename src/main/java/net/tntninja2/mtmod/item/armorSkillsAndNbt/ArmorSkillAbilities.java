@@ -131,10 +131,10 @@ public class ArmorSkillAbilities {
 
 //        Gutsy
 //        give the player a melee boost based on gutsy level and possibly the amount of damage they would have taken
-        if (amount > 20) {
-            amount = 20;
+        if (amount > 40) {
+            amount = 40;
         }
-        double gutsyAttackBoost = amount / 10 * gutsy;
+        double gutsyAttackBoost = amount / 5 * gutsy;
         AttributeUtil.attributeModifierAddOrReplace(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("9ac90cc9-0dce-4145-9d58-6121fa29aaf0"), "gutsy", gutsyAttackBoost, EntityAttributeModifier.Operation.ADDITION);
 
     }
@@ -184,7 +184,7 @@ public class ArmorSkillAbilities {
         }
 //        Damage Boost
         if (server.getTicks() % 5 == 0) {
-            AttributeUtil.attributeModifierAddOrReplace(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("ed1967dd-855f-487a-bc59-f362bc72a8b3"), "damage_boost", damageBoost, EntityAttributeModifier.Operation.ADDITION);
+            AttributeUtil.attributeModifierAddOrReplace(playerEntity, EntityAttributes.GENERIC_ATTACK_DAMAGE, UUID.fromString("ed1967dd-855f-487a-bc59-f362bc72a8b3"), "damage_boost", damageBoost / 2, EntityAttributeModifier.Operation.ADDITION);
         }
 
 //        Peak Performance

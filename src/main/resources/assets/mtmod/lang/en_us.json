@@ -12,6 +12,8 @@
 
   "key.mtmod.category.mt": "MT Mod Keybindings",
   "key.mtmod.dash": "Dash Key",
+  "key.mtmod.light_attack": "Light Attack Key",
+  "key.mtmod.heavy_attack": "Heavy Attack Key",
 
   "death.attack.armorSkill": "%1$s experienced too much pain in exchange for power"
 

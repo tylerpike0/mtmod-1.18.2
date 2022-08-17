@@ -1,0 +1,28 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.walk": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"foot": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, "4+time * 24"]
+						},
+						"0.4583": {
+							"vector": [-2, "2+(-time2  + 1.5*time - 0.5) * 5 +NaN", "18  - 26 * time"]
+						},
+						"0.7917": {
+							"vector": [0, "(-time2  + 1.5*time - 0.5) * 5 +NaN", "18  - 26 * time"]
+						},
+						"1.0": {
+							"vector": [0, 0, "29 - 26 * time"]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

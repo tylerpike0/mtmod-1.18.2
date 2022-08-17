@@ -1,11 +1,14 @@
 package net.tntninja2.mtmod.item.custom.weapons;
 
+import com.eliotlash.mclib.math.functions.classic.Mod;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.math.Vec3d;
+import net.tntninja2.mtmod.MTMod;
 
 import static net.tntninja2.mtmod.event.KeyInputHandler.getRotationVector;
 
@@ -25,6 +28,13 @@ public class KnockbackHammer1Item extends AxeItem {
 
     }
 
+    public void lightAttack(ItemStack itemStack, PlayerEntity player) {
+        MTMod.LOGGER.info("a light attack was used");
+    }
+
+    public void heavyAttack(ItemStack itemStack, PlayerEntity player) {
+        MTMod.LOGGER.info("a heavy attack was used");
+    }
 
 
 }
