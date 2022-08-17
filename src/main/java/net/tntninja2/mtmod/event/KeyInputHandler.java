@@ -18,6 +18,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.tntninja2.mtmod.item.custom.armor.ModArmorItem;
+import net.tntninja2.mtmod.item.custom.weapons.ModWeapon;
 import net.tntninja2.mtmod.mixinInterface.IMixinLivingEntity;
 import net.tntninja2.mtmod.networking.ModMessages;
 import net.tntninja2.mtmod.mixinInterface.IMixinEntity;
@@ -36,6 +37,8 @@ public class KeyInputHandler {
 
 
     public static KeyBinding dashKey;
+    public static KeyBinding lightAttackKey;
+    public static KeyBinding heavyAttackKey;
 
 
     public static Vec3d getRotationVector(float pitch, float yaw) {
@@ -50,6 +53,21 @@ public class KeyInputHandler {
 
     public static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (lightAttackKey.wasPressed()) {
+                ItemStack itemStack = client.player.getActiveItem();
+                Item item = itemStack.getItem();
+                if (item instanceof ModWeapon) {
+                    ((ModWeapon) item).lightAttack(itemStack, client.player);
+                }
+            }
+            if (heavyAttackKey.wasPressed()) {
+                ItemStack itemStack = client.player.getActiveItem();
+                Item item = itemStack.getItem();
+                if (item instanceof ModWeapon) {
+                    ((ModWeapon) item).heavyAttack(itemStack, client.player);
+                }
+            }
+
                     if (dashKey.wasPressed()) {
 //                This happens when custom key is pressed
                         int dashEnergy = ((IMixinEntity) client.player).getMTModData().getInt("dash_energy");

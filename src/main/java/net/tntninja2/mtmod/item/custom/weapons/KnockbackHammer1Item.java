@@ -12,7 +12,7 @@ import net.tntninja2.mtmod.MTMod;
 
 import static net.tntninja2.mtmod.event.KeyInputHandler.getRotationVector;
 
-public class KnockbackHammer1Item extends AxeItem {
+public class KnockbackHammer1Item extends ModWeapon {
 
     public KnockbackHammer1Item(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);

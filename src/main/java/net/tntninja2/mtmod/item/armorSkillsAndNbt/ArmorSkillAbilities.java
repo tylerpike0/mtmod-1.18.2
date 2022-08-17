@@ -125,7 +125,7 @@ public class ArmorSkillAbilities {
 
 //        Daring
 //        heal player based on daring level and possibly the amount of damage they would have taken
-        playerEntity.heal((float) amount / 12 * daring);
+        playerEntity.heal((float) amount / 6 * daring);
 
 
 
