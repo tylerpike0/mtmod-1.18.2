@@ -248,7 +248,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
     }
 
     private void addAllSkillsLevel2() {
-        for (String s : Arrays.asList("health_boost", "healing", "berserker", "peak_performance", "damage_boost", "luck", "pain_for_power", "magic_damage", "mana_regen", "resistance", "leeching", "evasion", "preserving", "afflicting", "combo", "fury", "fearless", "fearful", "greedy", "shattering")) {
+        for (String s : Arrays.asList("health_boost", "healing", "berserker", "peak_performance", "damage_boost", "luck", "pain_for_power", "magic_damage", "mana_regen", "resistance", "leeching", "evasion", "preserving", "afflicting", "combo", "daring", "gutsy", "greedy", "shattering")) {
             ((ItemStack) (Object) this).getOrCreateSubNbt("mtmod:armor_skills").putInt(s, 2);
         }
 
@@ -280,7 +280,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
 
     private void addRandomSkills(List<String> skills, int tier) {
         if (tier == 1) {
-            int skillRolls = Util.randomIntInRange(4,6);
+            int skillRolls = Util.randomIntInRange(1,2);
             while (skillRolls > 0) {
                 String skill = Util.randomStringElement(skills);
                 this.incrementSkill(skill);
@@ -300,7 +300,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
                 skillRolls--;
             }
         } else if (tier == 3) {
-            int skillRolls = Util.randomIntInRange(8, 10);
+            int skillRolls = Util.randomIntInRange(3, 4);
             while (skillRolls > 0) {
                 String skill = Util.randomStringElement(skills);
                 this.incrementSkill(skill);
@@ -311,7 +311,7 @@ public abstract class MixinItemStack implements IMixinItemStack {
                 skillRolls--;
             }
         } else if (tier == 4) {
-            int skillRolls = Util.randomIntInRange(10, 12);
+            int skillRolls = Util.randomIntInRange(5, 6);
             while (skillRolls > 0) {
                 String skill = Util.randomStringElement(skills);
                 this.incrementSkill(skill);

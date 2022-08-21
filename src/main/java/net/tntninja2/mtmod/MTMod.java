@@ -6,6 +6,7 @@ import net.tntninja2.mtmod.block.ModBlocks;
 import net.tntninja2.mtmod.event.LivingEntityDamageCancelCallback;
 import net.tntninja2.mtmod.item.ModItems;
 import net.tntninja2.mtmod.item.armorSkillsAndNbt.ArmorSkillAbilities;
+import net.tntninja2.mtmod.item.custom.RegisterPetTotemTick;
 import net.tntninja2.mtmod.networking.ModMessages;
 import net.tntninja2.mtmod.util.ModRegistries;
 import org.slf4j.Logger;
@@ -36,10 +37,8 @@ public class MTMod implements ModInitializer {
 
 		ArmorSkillAbilities.register();
 
-		LivingEntityDamageCancelCallback.EVENT.register((livingEntity, damageSource, amount) -> {
-			MTMod.LOGGER.info(livingEntity.getClass().descriptorString() + " was avoided " + amount + " from " + damageSource.toString());
-			return ActionResult.PASS;
-		});
+//		RegisterPetTotemTick.register();
+
 
 	}
 

@@ -49,10 +49,6 @@ public abstract class MixinLivingEntity extends Entity implements IMixinLivingEn
         ActionResult result = LivingEntityDamageCancelCallback.EVENT.invoker().damageCancel((LivingEntity) (Object) this, source, amount);
         if (((Object) this) instanceof ServerPlayerEntity) {
             (((ServerPlayerEntity) (Object) this)).networkHandler.sendPacket(new PlaySoundIdS2CPacket(SoundEvents.BLOCK_NOTE_BLOCK_CHIME.getId(), SoundCategory.MASTER, this.getPos(), 10, 1));
-            MTMod.LOGGER.info("mixin living entity IS a serverplayerentity");
-
-        } else {
-            MTMod.LOGGER.info("mixin living entity is NOT a serverplayerentity");
         }
         info.cancel();
     }

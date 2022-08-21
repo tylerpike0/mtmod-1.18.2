@@ -29,5 +29,10 @@ public abstract class MixinPlayerEntity extends LivingEntity implements IMixinPl
 
     }
 
+    @Inject( method = "tick", at = @At("HEAD"))
+    public void injectTick(CallbackInfo info) {
+
+    }
+
 
 }

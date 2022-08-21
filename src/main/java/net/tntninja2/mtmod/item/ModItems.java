@@ -9,7 +9,9 @@ import net.minecraft.util.registry.Registry;
 import net.tntninja2.mtmod.entity.ModEntities;
 import net.tntninja2.mtmod.item.custom.MythrilIngotItem;
 import net.tntninja2.mtmod.item.custom.armor.*;
+import net.tntninja2.mtmod.item.custom.petTotems.PetTestTotemItem;
 import net.tntninja2.mtmod.item.custom.weapons.KnockbackHammer1Item;
+import net.tntninja2.mtmod.item.custom.weapons.ModToolMaterials;
 
 public class ModItems {
     public static final Item MYTHRIL_INGOT = registerItem("mythril_ingot",
@@ -22,8 +24,11 @@ public class ModItems {
             new SpawnEggItem(ModEntities.MYTHRIL_GOLEM, 999999, 000000,
                     new FabricItemSettings().group(ItemGroup.MISC)));
 
+    public static final Item PET_TEST_TOTEM_ITEM = registerItem("pet_test_totem_item",
+            new PetTestTotemItem(new FabricItemSettings().group(ItemGroup.MISC)));
+
     public static final Item KNOCKBACK_HAMMER_1_ITEM = registerItem("knockback_hammer_1_item",
-            new KnockbackHammer1Item(ToolMaterials.NETHERITE,3.5f,0.9f,
+            new KnockbackHammer1Item(ModToolMaterials.WEAPON,3.5f,0.9f,
                     new FabricItemSettings().group(ItemGroup.MISC)));
 
     public static final Item TEST_HELMET = registerItem("test_helmet",

@@ -17,6 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.tntninja2.mtmod.MTMod;
 import net.tntninja2.mtmod.item.custom.armor.ModArmorItem;
 import net.tntninja2.mtmod.item.custom.weapons.ModWeapon;
 import net.tntninja2.mtmod.mixinInterface.IMixinLivingEntity;
@@ -54,18 +55,25 @@ public class KeyInputHandler {
     public static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (lightAttackKey.wasPressed()) {
-                ItemStack itemStack = client.player.getActiveItem();
+                ItemStack itemStack = client.player.getMainHandStack();
                 Item item = itemStack.getItem();
+                MTMod.LOGGER.info("light attack item is: " + item.getClass().descriptorString());
                 if (item instanceof ModWeapon) {
                     ((ModWeapon) item).lightAttack(itemStack, client.player);
                 }
+                ClientPlayNetworking.send(ModMessages.LIGHT_ATTACK_ID, PacketByteBufs.create());
+
+
             }
             if (heavyAttackKey.wasPressed()) {
-                ItemStack itemStack = client.player.getActiveItem();
+                ItemStack itemStack = client.player.getMainHandStack();
                 Item item = itemStack.getItem();
+                MTMod.LOGGER.info("heavy attack item is: " + item.getClass().descriptorString());
+
                 if (item instanceof ModWeapon) {
                     ((ModWeapon) item).heavyAttack(itemStack, client.player);
                 }
+                ClientPlayNetworking.send(ModMessages.HEAVY_ATTACK_ID, PacketByteBufs.create());
             }
 
                     if (dashKey.wasPressed()) {

@@ -15,12 +15,17 @@ public class ModMessages {
 
     public static final Identifier SYNC_DASH_MAX_ENERGY_ID = new Identifier(MTMod.MOD_ID, "sync_player_data_int");
 
+    public static final Identifier LIGHT_ATTACK_ID = new Identifier(MTMod.MOD_ID, "light_attack_int");
+    public static final Identifier HEAVY_ATTACK_ID = new Identifier(MTMod.MOD_ID, "heavy_attack_int");
+
 
 
     public static void registerC2SPackets() {
         ServerPlayNetworking.registerGlobalReceiver(DASH_ID, DashingC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(PET_SPAWN_ID, PetSpawnC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(INVULNERABILITY_TICKS_ID, SyncInvulnerabilityTicksC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(LIGHT_ATTACK_ID, LightAttackC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(HEAVY_ATTACK_ID, HeavyAttackC2SPacket::receive);
     }
 
     public static void registerS2CPackets() {
