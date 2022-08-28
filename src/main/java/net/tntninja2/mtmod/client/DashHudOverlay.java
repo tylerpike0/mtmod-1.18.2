@@ -73,13 +73,13 @@ public class DashHudOverlay implements HudRenderCallback {
         int oomphLines = oomph * 79  / 100;
         for (int i = 0; i < oomphLines; i++) {
             if (i == 0 || i == 78) {
-                DrawableHelper.drawTexture(matrixStack, x + 11  + i, y - 51 - verticalOffset, 0, 0, 1, 3,
+                DrawableHelper.drawTexture(matrixStack, x + 11  + i, y - 51, 0, 0, 1, 3,
                         1, 3);
             } else if (i == 1 || i == 77) {
-                DrawableHelper.drawTexture(matrixStack, x + 11  + i, y - 52 - verticalOffset, 0, 0, 1, 5,
+                DrawableHelper.drawTexture(matrixStack, x + 11  + i, y - 52, 0, 0, 1, 5,
                         1, 5);
             } else {
-                DrawableHelper.drawTexture(matrixStack, x + 11 + i, y - 53 - verticalOffset, 0, 0, 1, 7,
+                DrawableHelper.drawTexture(matrixStack, x + 11 + i, y - 53, 0, 0, 1, 7,
                         1, 7);
             }
 
