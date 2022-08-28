@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 import net.tntninja2.mtmod.MTMod;
 import net.tntninja2.mtmod.networking.packet.*;
+import net.tntninja2.mtmod.networking.packet.animation.TuffJumperJumpS2CPacket;
 
 public class ModMessages {
     public static final Identifier DASH_ID = new Identifier(MTMod.MOD_ID, "dashing");
@@ -19,6 +20,9 @@ public class ModMessages {
     public static final Identifier HEAVY_ATTACK_ID = new Identifier(MTMod.MOD_ID, "heavy_attack_int");
 
 
+    public static final Identifier ANIM_TUFF_JUMPER_JUMP_ID = new Identifier(MTMod.MOD_ID, "anim_tuff_jumper_jump");
+
+
 
     public static void registerC2SPackets() {
         ServerPlayNetworking.registerGlobalReceiver(DASH_ID, DashingC2SPacket::receive);
@@ -30,6 +34,7 @@ public class ModMessages {
 
     public static void registerS2CPackets() {
         ClientPlayNetworking.registerGlobalReceiver(SYNC_DASH_MAX_ENERGY_ID, SyncDashMaxEnergyS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ANIM_TUFF_JUMPER_JUMP_ID, TuffJumperJumpS2CPacket::receive);
 
 
 

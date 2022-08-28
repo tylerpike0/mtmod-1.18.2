@@ -57,7 +57,6 @@ public class KeyInputHandler {
             if (lightAttackKey.wasPressed()) {
                 ItemStack itemStack = client.player.getMainHandStack();
                 Item item = itemStack.getItem();
-                MTMod.LOGGER.info("light attack item is: " + item.getClass().descriptorString());
                 if (item instanceof ModWeapon) {
                     ((ModWeapon) item).lightAttack(itemStack, client.player);
                 }
@@ -68,7 +67,6 @@ public class KeyInputHandler {
             if (heavyAttackKey.wasPressed()) {
                 ItemStack itemStack = client.player.getMainHandStack();
                 Item item = itemStack.getItem();
-                MTMod.LOGGER.info("heavy attack item is: " + item.getClass().descriptorString());
 
                 if (item instanceof ModWeapon) {
                     ((ModWeapon) item).heavyAttack(itemStack, client.player);

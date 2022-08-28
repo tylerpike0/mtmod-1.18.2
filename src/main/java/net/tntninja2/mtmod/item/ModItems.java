@@ -20,9 +20,9 @@ public class ModItems {
 //    and replace all instances of mythril_ingot with new item name
 
 
-    public static final Item MYTHRIL_GOLEM_SPAWN_EGG = registerItem("mythril_golem_spawn_egg",
-            new SpawnEggItem(ModEntities.MYTHRIL_GOLEM, 999999, 000000,
-                    new FabricItemSettings().group(ItemGroup.MISC)));
+//    public static final Item MYTHRIL_GOLEM_SPAWN_EGG = registerItem("mythril_golem_spawn_egg",
+//            new SpawnEggItem(ModEntities.MYTHRIL_GOLEM, 999999, 000000,
+//                    new FabricItemSettings().group(ItemGroup.MISC)));
 
     public static final Item PET_TEST_TOTEM_ITEM = registerItem("pet_test_totem_item",
             new PetTestTotemItem(new FabricItemSettings().group(ItemGroup.MISC)));

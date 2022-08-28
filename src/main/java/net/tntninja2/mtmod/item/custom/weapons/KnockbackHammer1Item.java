@@ -1,26 +1,20 @@
 package net.tntninja2.mtmod.item.custom.weapons;
 
-import com.eliotlash.mclib.math.functions.classic.Mod;
-import joptsimple.internal.Classes;
-import net.fabricmc.mappings.model.CommentEntry;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.tntninja2.mtmod.MTMod;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import static net.tntninja2.mtmod.event.KeyInputHandler.getRotationVector;
 
@@ -31,28 +25,55 @@ public class KnockbackHammer1Item extends ModWeapon {
     }
 
     @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public boolean postHit(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
         Vec3d rotationVector;
         rotationVector = getRotationVector(attacker.getPitch(), attacker.getYaw());
         target.addVelocity(rotationVector.x, 0, rotationVector.z);
-        super.postHit(stack, target, attacker);
+        changeOomph(5, itemStack);
+        super.postHit(itemStack, target, attacker);
         return false;
 
     }
 
     public void lightAttack(ItemStack itemStack, PlayerEntity player) {
-            World world = player.getWorld();
+        World world = player.getWorld();
+        Vec3d playerPos = player.getPos();
+        Vec3d rotationVector = player.getRotationVector();
+        Vec3d hitBoxPos = playerPos.add(rotationVector.multiply(2, 0, 2));
+        Box hitBox = new Box(-2 + hitBoxPos.x, hitBoxPos.y - 1, -2 + hitBoxPos.z,
+                2 + hitBoxPos.x, 2 + hitBoxPos.y, 2 + hitBoxPos.z);
+
+        Vec3d knockBackVector = rotationVector.rotateY((float) Math.toRadians(
+                player.getMainArm().name() == "RIGHT" ? 45: -45));
+
+        if (checkOomph(20, itemStack)) {
+            changeOomph(-20, itemStack);
             if (!world.isClient()) {
-                Box box = new Box(-100, -100, -100, 100, 100, 100);
-                LivingEntity nearestEntity = world.getClosestEntity(LivingEntity.class, TargetPredicate.DEFAULT, player, player.getX(), player.getY(), player.getZ(), box);
-                if (nearestEntity != null) {
-                    nearestEntity.kill();
+                List<Entity> entities =  world.getOtherEntities(player, hitBox);
+                for (Entity entity: entities) {
+                    if (entity instanceof LivingEntity) {
+                        entity.damage(DamageSource.player(player), 5);
+                        entity.addVelocity(knockBackVector.x, 0.1, knockBackVector.z);
+                    }
+                }
+
+
+            } else {
+                world.addParticle(DustParticleEffect.DEFAULT, hitBoxPos.x - knockBackVector.x * 1.5, hitBoxPos.y + 1, hitBoxPos.z - knockBackVector.z * 1.5, knockBackVector.x, 0, knockBackVector.z);
+                world.addParticle(DustParticleEffect.DEFAULT, hitBoxPos.x, hitBoxPos.y, hitBoxPos.z, 0, 0, 0);
+                world.addParticle(DustParticleEffect.DEFAULT, hitBoxPos.x, hitBoxPos.y, hitBoxPos.z, 0, 0, 0);
+
+                for (int i = 0; i < 20; i++) {
+                    world.addParticle(DustParticleEffect.DEFAULT, hitBoxPos.x - knockBackVector.x * 1.5 + RandomGenerator.getDefault().nextDouble(-1, 1),
+                            hitBoxPos.y + 1, hitBoxPos.z - knockBackVector.z * 1.5 + RandomGenerator.getDefault().nextDouble(-1, 1),
+                            knockBackVector.x, 0, knockBackVector.z);
+
                 }
             }
+        }
     }
 
     public void heavyAttack(ItemStack itemStack, PlayerEntity player) {
-        MTMod.LOGGER.info("a heavy attack was used");
     }
 
 

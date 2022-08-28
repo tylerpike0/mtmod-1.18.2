@@ -32,6 +32,11 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PetTestEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5625f,0.5625f)).build());
 
+    public static final EntityType<TuffJumperEntity> TUFF_JUMPER = Registry.register(
+            Registry.ENTITY_TYPE, new Identifier(MTMod.MOD_ID, "tuff_jumper"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TuffJumperEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.7f,1f)).build());
+
 //static {
 //    ARMOR_STAND = register("armor_stand", EntityType.Builder.create(ArmorStandEntity::new, SpawnGroup.MISC)
 //            .setDimensions(0.5F, 1.975F).maxTrackingRange(10));

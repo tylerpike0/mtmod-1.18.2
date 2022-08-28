@@ -18,6 +18,13 @@ public class DashHudOverlay implements HudRenderCallback {
             "textures/dash/filled_dash_energy.png");
     private static final Identifier EMPTY_DASH_ENERGY = new Identifier(MTMod.MOD_ID,
             "textures/dash/empty_dash_energy.png");
+
+    private static final Identifier EMPTY_OOMPH_BAR = new Identifier(MTMod.MOD_ID,
+            "textures/oomph/empty_oomph_bar.png");
+
+    private static final Identifier LONG_OOMPH_LINE = new Identifier(MTMod.MOD_ID,
+            "textures/oomph/oomph_line.png");
+
     @Override
     public void onHudRender(MatrixStack matrixStack, float tickDelta) {
         int x = 0;
@@ -52,5 +59,33 @@ public class DashHudOverlay implements HudRenderCallback {
                         12, 12);
 
         }
+
+
+        RenderSystem.setShaderTexture(0, EMPTY_OOMPH_BAR);
+        DrawableHelper.drawTexture(matrixStack, x + 10, y - 54, 0, 0, 81, 9,
+                81, 9);
+
+
+        RenderSystem.setShaderTexture(0, LONG_OOMPH_LINE);
+
+
+        int oomph = client.player.getMainHandStack().getOrCreateSubNbt("mtmod:weapon_attacks").getInt("oomph");
+        int oomphLines = oomph * 79  / 100;
+        for (int i = 0; i < oomphLines; i++) {
+            if (i == 0 || i == 78) {
+                DrawableHelper.drawTexture(matrixStack, x + 11  + i, y - 51 - verticalOffset, 0, 0, 1, 3,
+                        1, 3);
+            } else if (i == 1 || i == 77) {
+                DrawableHelper.drawTexture(matrixStack, x + 11  + i, y - 52 - verticalOffset, 0, 0, 1, 5,
+                        1, 5);
+            } else {
+                DrawableHelper.drawTexture(matrixStack, x + 11 + i, y - 53 - verticalOffset, 0, 0, 1, 7,
+                        1, 7);
+            }
+
+        }
+
+
+
     }
 }
