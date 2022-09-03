@@ -22,7 +22,7 @@ public class MTModClient implements ClientModInitializer {
             EntityRendererRegistry.register(ModEntities.ACID_SLIME, AcidSlimeRenderer::new);
             EntityRendererRegistry.register(ModEntities.WINGED_BEAST, WingedBeastRenderer::new);
             EntityRendererRegistry.register(ModEntities.PET_TEST, PetTestRenderer::new);
-            EntityRendererRegistry.register(ModEntities.TUFF_JUMPER, TuffJumperRenderer::new);
+            EntityRendererRegistry.register(ModEntities.SLATE_JUMPER, SlateJumperRenderer::new);
 
             HudRenderCallback.EVENT.register(new DashHudOverlay());
 

@@ -3,9 +3,9 @@ package net.tntninja2.mtmod.entity.custom;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.ai.pathing.PathNode;
@@ -13,7 +13,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -23,8 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.tntninja2.mtmod.MTMod;
 import net.tntninja2.mtmod.block.ModBlocks;
-import net.tntninja2.mtmod.goal.EscapeAcidGoal;
-import net.tntninja2.mtmod.goal.TuffJumperJumpGoal;
 import net.tntninja2.mtmod.networking.ModMessages;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -35,13 +32,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class TuffJumperEntity extends ModMobEntity implements IAnimatable {
+public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public boolean shouldJump;
 
 
-    public TuffJumperEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public SlateCannonEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -67,7 +64,6 @@ public class TuffJumperEntity extends ModMobEntity implements IAnimatable {
 
     protected void initGoals() {
         this.goalSelector.add(0, new LookAtEntityGoal(this, PlayerEntity.class, 50));
-        this.goalSelector.add(1, new TuffJumperJumpGoal(this, 1f));
 
 
         this.targetSelector.add(0, new ActiveTargetGoal(this, PlayerEntity.class, true));
@@ -88,7 +84,7 @@ public class TuffJumperEntity extends ModMobEntity implements IAnimatable {
             for (PlayerEntity playerEntity: world.getPlayers() ) {
                 PacketByteBuf buf = PacketByteBufs.create();
                 buf.writeInt(this.getId());
-                ServerPlayNetworking.send((ServerPlayerEntity) playerEntity, ModMessages.ANIM_TUFF_JUMPER_JUMP_ID, buf);
+                ServerPlayNetworking.send((ServerPlayerEntity) playerEntity, ModMessages.ANIM_SLATE_JUMPER_JUMP_ID, buf);
 
             }
         }
@@ -100,7 +96,7 @@ public class TuffJumperEntity extends ModMobEntity implements IAnimatable {
         if (this.shouldJump) {
             MTMod.LOGGER.info("Set animation on " + this.world.getClass().descriptorString());
             event.getController().clearAnimationCache();
-            event.getController().setAnimation((new AnimationBuilder().addAnimation("animation.tuff_jumper.jump", true)));
+            event.getController().setAnimation((new AnimationBuilder().addAnimation("animation.slate_jumper.jump", true)));
 
             this.shouldJump = false;
         } else {

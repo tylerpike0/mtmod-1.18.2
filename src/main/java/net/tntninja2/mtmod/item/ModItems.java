@@ -6,7 +6,6 @@ import net.minecraft.item.*;
 import net.tntninja2.mtmod.MTMod;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.tntninja2.mtmod.entity.ModEntities;
 import net.tntninja2.mtmod.item.custom.MythrilIngotItem;
 import net.tntninja2.mtmod.item.custom.armor.*;
 import net.tntninja2.mtmod.item.custom.petTotems.PetTestTotemItem;
