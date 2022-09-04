@@ -1,5 +1,7 @@
 package net.tntninja2.mtmod.entity.custom;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.EntityType;
@@ -12,14 +14,18 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.tntninja2.mtmod.networking.ModMessages;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -30,6 +36,7 @@ import java.util.List;
 public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
+    boolean shouldLaser;
 
 
     public SlateCannonEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
@@ -67,15 +74,30 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
 //
 //        this.goalSelector.add(5, new LookAroundGoal(this));
 
+    }
 
 
+    public void startLaser(){
+        this.shouldLaser = true;
+        if (!world.isClient()) {
+            for (PlayerEntity playerEntity : world.getPlayers()) {
+                PacketByteBuf buf = PacketByteBufs.create();
+                buf.writeInt(this.getId());
+                ServerPlayNetworking.send((ServerPlayerEntity) playerEntity, ModMessages.ANIM_SLATE_CANNON_LASER_ID, buf);
+
+            }
+        }
     }
 
 
 
     private  <E extends IAnimatable> PlayState predicate(@NotNull AnimationEvent<E> event) {
 //        Logic for controlling animations
-
+        if (shouldLaser) {
+            event.getController().clearAnimationCache();
+            event.getController().setAnimation((new AnimationBuilder().addAnimation("animation.slate_cannon.heatup")));
+            this.shouldLaser = false;
+        }
         return PlayState.CONTINUE;
 
     }

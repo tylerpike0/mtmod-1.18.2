@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 import net.tntninja2.mtmod.MTMod;
 import net.tntninja2.mtmod.networking.packet.*;
+import net.tntninja2.mtmod.networking.packet.animation.SlateCannonLaserS2CPacket;
 import net.tntninja2.mtmod.networking.packet.animation.SlateJumperCrouchS2CPacket;
 import net.tntninja2.mtmod.networking.packet.animation.SlateJumperJumpS2CPacket;
 import net.tntninja2.mtmod.networking.packet.animation.SlateJumperRollS2CPacket;
@@ -23,8 +24,10 @@ public class ModMessages {
 
 
     public static final Identifier ANIM_SLATE_JUMPER_JUMP_ID = new Identifier(MTMod.MOD_ID, "anim_slate_jumper_jump");
-    public static final Identifier ANIM_SLATE_JUMPER_CROUCH_ID = new Identifier(MTMod.MOD_ID, "anim_slate_crouch_jump");
-    public static final Identifier ANIM_SLATE_JUMPER_ROLL_ID = new Identifier(MTMod.MOD_ID, "anim_slate_roll_jump");
+    public static final Identifier ANIM_SLATE_JUMPER_CROUCH_ID = new Identifier(MTMod.MOD_ID, "anim_slate_jumper_crouch");
+    public static final Identifier ANIM_SLATE_JUMPER_ROLL_ID = new Identifier(MTMod.MOD_ID, "anim_slate_jumper_roll");
+
+    public static final Identifier ANIM_SLATE_CANNON_LASER_ID = new Identifier(MTMod.MOD_ID, "anim_slate_cannon_laser");
 
 
 
@@ -41,6 +44,7 @@ public class ModMessages {
         ClientPlayNetworking.registerGlobalReceiver(ANIM_SLATE_JUMPER_JUMP_ID, SlateJumperJumpS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ANIM_SLATE_JUMPER_CROUCH_ID, SlateJumperCrouchS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ANIM_SLATE_JUMPER_ROLL_ID, SlateJumperRollS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ANIM_SLATE_CANNON_LASER_ID, SlateCannonLaserS2CPacket::receive);
 
 
 
