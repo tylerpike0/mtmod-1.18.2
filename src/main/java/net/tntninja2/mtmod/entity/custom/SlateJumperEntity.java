@@ -208,7 +208,7 @@ public class SlateJumperEntity extends ModMobEntity implements IAnimatable {
 
         public boolean shouldContinue() {
 
-            return (!this.mob.isOnGround() || this.ticks < 10) && Math.random() < 0.5;
+            return (!this.mob.isOnGround() || this.ticks < 10);
         }
 
         @Override

@@ -3,10 +3,7 @@
 
         import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
         import net.tntninja2.mtmod.entity.ModEntities;
-        import net.tntninja2.mtmod.entity.custom.AcidSlimeEntity;
-        import net.tntninja2.mtmod.entity.custom.MythrilGolemEntity;
-        import net.tntninja2.mtmod.entity.custom.PetTestEntity;
-        import net.tntninja2.mtmod.entity.custom.SlateJumperEntity;
+        import net.tntninja2.mtmod.entity.custom.*;
 
         public class ModRegistries {
     public static void registerModStuffs() {
@@ -21,5 +18,6 @@
         FabricDefaultAttributeRegistry.register(ModEntities.WINGED_BEAST, AcidSlimeEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.PET_TEST, PetTestEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SLATE_JUMPER, SlateJumperEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.SLATE_CANNON, SlateCannonEntity.setAttributes());
     }
 }
