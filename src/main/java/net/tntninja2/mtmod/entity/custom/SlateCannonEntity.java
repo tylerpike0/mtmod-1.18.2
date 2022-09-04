@@ -188,7 +188,7 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
                         hitBoxPos.x + 0.5, hitBoxPos.y + 0.5, hitBoxPos.z + 0.5);
 
                 List<LivingEntity> livingEntities = this.slateCannonEntity.world.getEntitiesByClass(LivingEntity.class, hitBox, livingEntity -> {
-                    return true;
+                   return livingEntity instanceof SlateCannonEntity;
                 });
                 for (LivingEntity livingEntity : livingEntities) {
                     this.slateCannonEntity.tryAttack(livingEntity);
