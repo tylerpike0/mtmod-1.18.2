@@ -158,7 +158,7 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
             super.tick();
 
             if (ticks < 80) {
-                this.slateCannonEntity.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.target.getPos());
+                this.slateCannonEntity.lookAt(EntityAnchorArgumentType.EntityAnchor.FEET, this.target.getPos());
             }
 
             this.ticks++;
@@ -169,6 +169,8 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
             this.target = this.slateCannonEntity.getTarget();
 
             this.ticks = 0;
+
+            this.slateCannonEntity.startLaser();
 
             super.start();
         }
@@ -188,7 +190,7 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
                         hitBoxPos.x + 0.5, hitBoxPos.y + 0.5, hitBoxPos.z + 0.5);
 
                 List<LivingEntity> livingEntities = this.slateCannonEntity.world.getEntitiesByClass(LivingEntity.class, hitBox, livingEntity -> {
-                   return livingEntity instanceof SlateCannonEntity;
+                   return !(livingEntity instanceof SlateCannonEntity);
                 });
                 for (LivingEntity livingEntity : livingEntities) {
                     this.slateCannonEntity.tryAttack(livingEntity);
