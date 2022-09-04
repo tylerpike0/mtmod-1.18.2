@@ -64,7 +64,6 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
         this.targetSelector.add(0, new ActiveTargetGoal(this, PlayerEntity.class, true));
 
 
-
 //
 //        this.goalSelector.add(5, new LookAroundGoal(this));
 
