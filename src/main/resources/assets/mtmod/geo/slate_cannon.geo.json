@@ -6,7 +6,7 @@
         "identifier": "geometry.unknown",
         "texture_width": 64,
         "texture_height": 64,
-        "visible_bounds_width": 2,
+        "visible_bounds_width": 3,
         "visible_bounds_height": 2.5,
         "visible_bounds_offset": [0, 0.75, 0]
       },
@@ -482,7 +482,7 @@
                 "east": {"uv": [0, 43], "uv_size": [23, 21]},
                 "south": {"uv": [43, 0], "uv_size": [21, 19]},
                 "west": {"uv": [20, 43], "uv_size": [21, 21]},
-                "up": {"uv": [16, 36], "uv_size": [8, 8]},
+                "up": {"uv": [6, 0], "uv_size": [25, 20]},
                 "down": {"uv": [42, 64], "uv_size": [22, -21]}
               }
             },
@@ -658,6 +658,25 @@
                 "west": {"uv": [21, 54], "uv_size": [21, 4]},
                 "up": {"uv": [20, 53], "uv_size": [9, 4]},
                 "down": {"uv": [21, 57], "uv_size": [9, -4]}
+              }
+            }
+          ]
+        },
+        {
+          "name": "beam",
+          "parent": "head",
+          "pivot": [-0.05, 11.55, -7.95],
+          "cubes": [
+            {
+              "origin": [-0.1, 11.5, -8],
+              "size": [0.1, 0.1, 0.1],
+              "uv": {
+                "north": {"uv": [3, 20], "uv_size": [-2, 2]},
+                "east": {"uv": [0, 24], "uv_size": [4, -4]},
+                "south": {"uv": [3, 23], "uv_size": [-2, -2]},
+                "west": {"uv": [0, 21], "uv_size": [4, 3]},
+                "up": {"uv": [3, 24], "uv_size": [-3, -3]},
+                "down": {"uv": [3, 23], "uv_size": [-3, -3]}
               }
             }
           ]
