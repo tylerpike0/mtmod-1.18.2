@@ -1,41 +1,35 @@
 package net.tntninja2.mtmod.entity.custom;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.MobNavigation;
-import net.minecraft.entity.ai.pathing.PathNode;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.tntninja2.mtmod.MTMod;
-import net.tntninja2.mtmod.block.ModBlocks;
-import net.tntninja2.mtmod.networking.ModMessages;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.List;
+
 public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    public boolean shouldJump;
 
 
     public SlateCannonEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
@@ -64,6 +58,7 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
 
     protected void initGoals() {
         this.goalSelector.add(0, new LookAtEntityGoal(this, PlayerEntity.class, 50));
+        this.goalSelector.add(0, new SlateCannonAttackGoal(this));
 
 
         this.targetSelector.add(0, new ActiveTargetGoal(this, PlayerEntity.class, true));
@@ -77,30 +72,10 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
 
     }
 
-    public void startJump() {
-        this.shouldJump = true;
-        MTMod.LOGGER.info("startedJump");
-        if (!world.isClient()) {
-            for (PlayerEntity playerEntity: world.getPlayers() ) {
-                PacketByteBuf buf = PacketByteBufs.create();
-                buf.writeInt(this.getId());
-                ServerPlayNetworking.send((ServerPlayerEntity) playerEntity, ModMessages.ANIM_SLATE_JUMPER_JUMP_ID, buf);
 
-            }
-        }
-
-    }
 
     private  <E extends IAnimatable> PlayState predicate(@NotNull AnimationEvent<E> event) {
 //        Logic for controlling animations
-        if (this.shouldJump) {
-            MTMod.LOGGER.info("Set animation on " + this.world.getClass().descriptorString());
-            event.getController().clearAnimationCache();
-            event.getController().setAnimation((new AnimationBuilder().addAnimation("animation.slate_jumper.jump", true)));
-
-            this.shouldJump = false;
-        } else {
-        }
 
         return PlayState.CONTINUE;
 
@@ -122,33 +97,86 @@ public class SlateCannonEntity extends ModMobEntity implements IAnimatable {
         this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15f, 1f);
     }
 
-    protected EntityNavigation createNavigation(World world) {
-        return new Navigation(this, world);
-    }
 
 
-    private static class Navigation extends MobNavigation{
+    class SlateCannonAttackGoal extends Goal {
 
-        public Navigation(MobEntity mobEntity, World world) {
-            super(mobEntity, world);
+        int ticks;
+
+        final SlateCannonEntity slateCannonEntity;
+
+        LivingEntity target;
+
+        SlateCannonAttackGoal(SlateCannonEntity slateCannonEntity) {
+            this.slateCannonEntity = slateCannonEntity;
         }
 
-        protected void adjustPath() {
-            super.adjustPath();
-            if (world.getBlockState(new BlockPos(this.entity.getX(), this.entity.getY() + 0.5, this.entity.getZ())) == ModBlocks.ACID_BLOCK.getDefaultState()) {
-                return;
+
+        @Override
+        public boolean canStart() {
+            this.target = this.slateCannonEntity.getTarget();
+            if (this.target != null) {
+                Vec3d cannonPos = this.slateCannonEntity.getPos();
+                Vec3d targetPos = this.target.getPos();
+                double distance = cannonPos.distanceTo(targetPos);
+                return distance < 40 && distance > 5;
+            } else {
+                return false;
             }
 
-            for(int i = 0; i < this.currentPath.getLength(); ++i) {
-                PathNode pathNode = this.currentPath.getNode(i);
-                if (this.world.getBlockState(new BlockPos(this.entity.getX(), this.entity.getY() + 0.5, this.entity.getZ())) == ModBlocks.ACID_BLOCK.getDefaultState()) {
-                    this.currentPath.setLength(i);
-                    return;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return ticks < 100;
+
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+
+            if (ticks < 80) {
+                this.slateCannonEntity.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.target.getPos());
+            }
+
+            this.ticks++;
+        }
+
+        @Override
+        public void start() {
+            this.target = this.slateCannonEntity.getTarget();
+
+            this.ticks = 0;
+
+            super.start();
+        }
+
+
+        @Override
+        public void stop() {
+            Vec3d pos = this.slateCannonEntity.getPos();
+            Vec3d rotationVector = this.slateCannonEntity.getRotationVector();
+            rotationVector = rotationVector.multiply(0.1);
+
+            for (int i = 0; i < 500; i++) {
+
+                Vec3d distance = rotationVector.multiply(i);
+                Vec3d hitBoxPos = pos.add(distance);
+                Box hitBox = new Box(hitBoxPos.x - 0.5, hitBoxPos.y - 0.5, hitBoxPos.z - 0.5,
+                        hitBoxPos.x + 0.5, hitBoxPos.y + 0.5, hitBoxPos.z + 0.5);
+
+                List<LivingEntity> livingEntities = this.slateCannonEntity.world.getEntitiesByClass(LivingEntity.class, hitBox, livingEntity -> {
+                    return true;
+                });
+                for (LivingEntity livingEntity : livingEntities) {
+                    this.slateCannonEntity.tryAttack(livingEntity);
                 }
+
+
             }
 
-
+            super.stop();
         }
     }
-
 }
